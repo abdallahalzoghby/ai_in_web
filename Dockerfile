@@ -5,10 +5,12 @@ FROM python:3.11-slim
 WORKDIR /app
 
 # Copy the contents of the 'app' directory from your local machine to the '/app' directory inside the container
-COPY . /app
+COPY . /app  
 
 # Install the dependencies listed in the requirements.txt file located inside the 'app' directory
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --default-timeout=100 -r requirements.txt
+
+RUN pip install --no-cache-dir scikit-learn joblib
 
 # Expose the port that FastAPI server will run on
 EXPOSE 80
